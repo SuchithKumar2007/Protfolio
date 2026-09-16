@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400" role="img" aria-label="Vector illustration portrait of Suchith Kumar V S">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="50%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#1e1b4b"/>
+    </linearGradient>
+    <linearGradient id="skinGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f8c291"/>
+      <stop offset="100%" stop-color="#e59866"/>
+    </linearGradient>
+    <linearGradient id="shirtGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <!-- Background Circle -->
+  <circle cx="200" cy="200" r="190" fill="url(#bgGrad)"/>
+  
+  <!-- Outer Ring Accent -->
+  <circle cx="200" cy="200" r="192" fill="none" stroke="#67e8f9" stroke-width="4" stroke-opacity="0.5"/>
+
+  <!-- Body / Shoulders -->
+  <path d="M90 380 C90 300, 140 270, 200 270 C260 270, 310 300, 310 380 Z" fill="url(#shirtGrad)" filter="url(#shadow)"/>
+  <path d="M160 270 L200 320 L240 270 Z" fill="#ffffff" opacity="0.95"/>
+  <path d="M195 290 L200 380 L205 290 Z" fill="#0284c7"/>
+
+  <!-- Neck -->
+  <rect x="175" y="220" width="50" height="60" rx="10" fill="#e59866"/>
+  <path d="M175 240 Q200 255 225 240 L225 255 Q200 270 175 255 Z" fill="#d97736" opacity="0.4"/>
+
+  <!-- Head / Face -->
+  <rect x="145" y="110" width="110" height="135" rx="55" fill="url(#skinGrad)" filter="url(#shadow)"/>
+
+  <!-- Ears -->
+  <circle cx="140" cy="175" r="16" fill="#e59866"/>
+  <circle cx="260" cy="175" r="16" fill="#e59866"/>
+
+  <!-- Hair -->
+  <path d="M140 145 C135 90, 170 65, 200 65 C230 65, 265 90, 260 145 C250 115, 230 100, 200 100 C170 100, 150 115, 140 145 Z" fill="#1e293b"/>
+  <!-- Sideburns -->
+  <rect x="142" y="140" width="12" height="35" rx="5" fill="#1e293b"/>
+  <rect x="246" y="140" width="12" height="35" rx="5" fill="#1e293b"/>
+
+  <!-- Eyebrows -->
+  <path d="M160 145 Q175 140 185 146" fill="none" stroke="#1e293b" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M215 146 Q225 140 240 145" fill="none" stroke="#1e293b" stroke-width="4.5" stroke-linecap="round"/>
+
+  <!-- Eyes -->
+  <ellipse cx="172" cy="160" rx="7.5" ry="6" fill="#0f172a"/>
+  <ellipse cx="228" cy="160" rx="7.5" ry="6" fill="#0f172a"/>
+  <circle cx="174" cy="158" r="2.5" fill="#ffffff"/>
+  <circle cx="230" cy="158" r="2.5" fill="#ffffff"/>
+
+  <!-- Glasses -->
+  <rect x="156" y="146" width="34" height="28" rx="8" fill="none" stroke="#0f172a" stroke-width="4"/>
+  <rect x="210" y="146" width="34" height="28" rx="8" fill="none" stroke="#0f172a" stroke-width="4"/>
+  <path d="M190 158 L210 158" fill="none" stroke="#0f172a" stroke-width="4"/>
+  <path d="M145 154 L156 156" fill="none" stroke="#0f172a" stroke-width="3.5"/>
+  <path d="M244 156 L255 154" fill="none" stroke="#0f172a" stroke-width="3.5"/>
+
+  <!-- Nose -->
+  <path d="M200 162 L196 182 L204 182" fill="none" stroke="#d97736" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Smile -->
+  <path d="M185 198 Q200 212 215 198" fill="none" stroke="#991b1b" stroke-width="3.5" stroke-linecap="round"/>
+
+  <!-- Tech Badges / Floating Elements -->
+  <g transform="translate(45, 120)" opacity="0.9">
+    <circle cx="20" cy="20" r="22" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
+    <text x="20" y="26" fill="#38bdf8" font-size="16" font-family="monospace" font-weight="bold" text-anchor="middle">&lt;/&gt;</text>
+  </g>
+
+  <g transform="translate(315, 130)" opacity="0.9">
+    <circle cx="20" cy="20" r="22" fill="#0f172a" stroke="#4ade80" stroke-width="2"/>
+    <text x="20" y="27" fill="#4ade80" font-size="18" font-family="sans-serif" font-weight="bold" text-anchor="middle">⚡</text>
+  </g>
+</svg>
