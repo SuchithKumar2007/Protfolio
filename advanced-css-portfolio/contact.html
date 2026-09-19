@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Suchith Kumar V S | SRM Easwari Engineering College</title>
+  <meta name="description" content="Get in touch with Suchith Kumar V S, 2nd-year Computer Science Engineering student at SRM Easwari Engineering College, Chennai, Tamil Nadu. Tab-navigable contact form and editable contact details.">
+  <meta name="author" content="Suchith Kumar V S">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#1d4ed8">
+  <link rel="canonical" href="https://suchithkumarvs.dev/contact.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://suchithkumarvs.dev/contact.html">
+  <meta property="og:title" content="Contact Suchith Kumar V S | SRM Easwari Engineering College">
+  <meta property="og:description" content="Reach out to Suchith Kumar V S in Chennai, Tamil Nadu for engineering collaborations, project inquiries, and internships.">
+  <meta property="og:image" content="assets/avatar.svg">
+  <meta property="og:site_name" content="Suchith Kumar V S Portfolio">
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact Suchith Kumar V S",
+    "description": "Contact channels and accessible contact form for Suchith Kumar V S in Chennai, Tamil Nadu.",
+    "url": "https://suchithkumarvs.dev/contact.html"
+  }
+  </script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="index.html" class="brand-link" aria-label="Suchith Kumar V S Homepage">
+        <img src="assets/favicon.svg" alt="" width="40" height="40" class="brand-icon" aria-hidden="true">
+        <span class="brand-title">
+          <span class="brand-name">SUCHITH KUMAR V S</span>
+          <span class="brand-role">SRM Easwari Engineering College &bull; CSE</span>
+        </span>
+      </a>
+
+      <div class="header-controls">
+        <button type="button" id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark/light theme" aria-pressed="false">
+          <svg class="theme-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Toggle navigation menu">
+          <svg class="theme-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <nav id="main-nav" class="site-nav" aria-label="Primary Navigation">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="projects.html" class="nav-link">Projects</a></li>
+          <li><a href="contact.html" class="nav-link" aria-current="page">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Landmark -->
+  <main id="main-content">
+    <section class="section" aria-labelledby="contact-heading">
+      <div class="container">
+        <h1 id="contact-heading">Contact Suchith Kumar V S</h1>
+        <p class="hero-lead">
+          Second-year undergraduate student at <strong>SRM Easwari Engineering College</strong>, Chennai, Tamil Nadu. Open for project collaborations, technical discussions, and internship opportunities.
+        </p>
+
+        <!-- 2D CSS Grid Layout for Contact Form and Details -->
+        <div class="contact-layout-grid">
+          <!-- Accessible, Tab-Navigable Contact Form -->
+          <div class="contact-card">
+            <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
+
+            <form id="contact-form" action="#" method="POST" novalidate>
+              <fieldset class="form-fieldset">
+                <legend class="form-legend">Send a Direct Message</legend>
+
+                <!-- Full Name Field -->
+                <div class="form-group">
+                  <label for="full-name" class="form-label">
+                    <span>Full Name</span>
+                    <span class="form-required-star" aria-label="required">*</span>
+                  </label>
+                  <span id="name-hint" class="form-hint">Enter your first and last name</span>
+                  <input
+                    type="text"
+                    id="full-name"
+                    name="name"
+                    class="form-control"
+                    required
+                    autocomplete="name"
+                    aria-required="true"
+                    aria-describedby="name-hint name-error"
+                  >
+                  <span id="name-error" class="form-error" role="alert">Please enter your full name.</span>
+                </div>
+
+                <!-- Email Field -->
+                <div class="form-group">
+                  <label for="email-address" class="form-label">
+                    <span>Email Address</span>
+                    <span class="form-required-star" aria-label="required">*</span>
+                  </label>
+                  <span id="email-hint" class="form-hint">We will only use this to respond to your inquiry</span>
+                  <input
+                    type="email"
+                    id="email-address"
+                    name="email"
+                    class="form-control"
+                    required
+                    autocomplete="email"
+                    aria-required="true"
+                    aria-describedby="email-hint email-error"
+                  >
+                  <span id="email-error" class="form-error" role="alert">Please enter a valid email address (e.g., user@example.com).</span>
+                </div>
+
+                <!-- Subject Category -->
+                <div class="form-group">
+                  <label for="subject-topic" class="form-label">
+                    <span>Inquiry Topic</span>
+                  </label>
+                  <select id="subject-topic" name="topic" class="form-control">
+                    <option value="project">Academic / Coding Project Collaboration</option>
+                    <option value="internship">Internship &amp; Apprenticeship Opportunity</option>
+                    <option value="web-dev">Web Development &amp; Cloud Project Query</option>
+                    <option value="general">General Question</option>
+                  </select>
+                </div>
+
+                <!-- Message Field -->
+                <div class="form-group">
+                  <label for="message-body" class="form-label">
+                    <span>Your Message</span>
+                    <span class="form-required-star" aria-label="required">*</span>
+                  </label>
+                  <span id="message-hint" class="form-hint">Provide relevant details regarding your inquiry (min. 10 characters)</span>
+                  <textarea
+                    id="message-body"
+                    name="message"
+                    class="form-control"
+                    required
+                    minlength="10"
+                    rows="5"
+                    aria-required="true"
+                    aria-describedby="message-hint message-error"
+                  ></textarea>
+                  <span id="message-error" class="form-error" role="alert">Message must contain at least 10 characters.</span>
+                </div>
+
+                <!-- Accessible Checkbox -->
+                <div class="checkbox-group">
+                  <input
+                    type="checkbox"
+                    id="privacy-consent"
+                    name="consent"
+                    class="checkbox-input"
+                    required
+                    aria-required="true"
+                    aria-describedby="consent-error"
+                  >
+                  <label for="privacy-consent" class="checkbox-label">
+                    I acknowledge that Suchith Kumar V S will use this information to respond to my inquiry.
+                    <span class="form-required-star" aria-label="required">*</span>
+                  </label>
+                </div>
+                <span id="consent-error" class="form-error" role="alert" style="margin-top: -1rem; margin-bottom: 1rem;">
+                  You must check this box before sending your message.
+                </span>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary" id="submit-button" style="width: 100%;">
+                  Send Message
+                </button>
+              </fieldset>
+            </form>
+          </div>
+
+          <!-- Contact Information & Editable Settings Sidebar -->
+          <div class="contact-sidebar-card">
+            <div class="contact-edit-header">
+              <h2 style="font-size: 1.35rem; margin-bottom: 0;">Contact Details</h2>
+              <!-- Editable Option Toggle Button -->
+              <button type="button" id="toggle-edit-contact" class="contact-edit-btn" aria-expanded="false" aria-controls="contact-edit-panel">
+                Edit Contact Info
+              </button>
+            </div>
+            
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">
+              You can view and customize your email, LinkedIn, GitHub, and location details below. Saved locally via localStorage.
+            </p>
+
+            <!-- Editable Options Panel -->
+            <div id="contact-edit-panel" class="contact-edit-panel" role="region" aria-label="Edit Contact Details">
+              <h3 style="font-size: 1.05rem; margin-bottom: 0.75rem; color: var(--color-primary);">Update Contact Channels</h3>
+              
+              <div>
+                <label for="edit-email">Email Address:</label>
+                <input type="email" id="edit-email" value="suchithkumarvs@gmail.com">
+              </div>
+
+              <div>
+                <label for="edit-location">Location:</label>
+                <input type="text" id="edit-location" value="Chennai, Tamil Nadu">
+              </div>
+
+              <div>
+                <label for="edit-github">GitHub Profile URL:</label>
+                <input type="url" id="edit-github" value="https://github.com/SuchithKumar2007">
+              </div>
+
+              <div>
+                <label for="edit-linkedin">LinkedIn Profile URL:</label>
+                <input type="url" id="edit-linkedin" value="https://linkedin.com/in/suchithkumarvs">
+              </div>
+
+              <div class="contact-edit-actions">
+                <button type="button" id="save-contact-details" class="btn btn-sm btn-primary">Save Changes</button>
+                <button type="button" id="reset-contact-details" class="btn btn-sm btn-secondary">Reset to Default</button>
+              </div>
+            </div>
+
+            <!-- Active Contact List -->
+            <address class="contact-list">
+              <!-- Location -->
+              <div class="contact-item">
+                <div class="contact-icon" aria-hidden="true">&#128205;</div>
+                <div class="contact-item-content">
+                  <span class="contact-label">Location</span>
+                  <span id="display-location" class="contact-value">Chennai, Tamil Nadu</span>
+                </div>
+              </div>
+
+              <!-- Email -->
+              <div class="contact-item">
+                <div class="contact-icon" aria-hidden="true">&#9993;</div>
+                <div class="contact-item-content">
+                  <span class="contact-label">Email</span>
+                  <a id="display-email" href="mailto:suchithkumarvs@gmail.com" class="contact-value">suchithkumarvs@gmail.com</a>
+                </div>
+              </div>
+
+              <!-- GitHub -->
+              <div class="contact-item">
+                <div class="contact-icon" aria-hidden="true">&#128187;</div>
+                <div class="contact-item-content">
+                  <span class="contact-label">GitHub</span>
+                  <a id="display-github" href="https://github.com/SuchithKumar2007" target="_blank" rel="noopener noreferrer" class="contact-value">https://github.com/SuchithKumar2007</a>
+                </div>
+              </div>
+
+              <!-- LinkedIn -->
+              <div class="contact-item">
+                <div class="contact-icon" aria-hidden="true">&#128101;</div>
+                <div class="contact-item-content">
+                  <span class="contact-label">LinkedIn</span>
+                  <a id="display-linkedin" href="https://linkedin.com/in/suchithkumarvs" target="_blank" rel="noopener noreferrer" class="contact-value">https://linkedin.com/in/suchithkumarvs</a>
+                </div>
+              </div>
+
+              <!-- College Institution -->
+              <div class="contact-item">
+                <div class="contact-icon" aria-hidden="true">&#127891;</div>
+                <div class="contact-item-content">
+                  <span class="contact-label">Institution</span>
+                  <span class="contact-value">SRM Easwari Engineering College (B.E. CSE)</span>
+                </div>
+              </div>
+            </address>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Aside Landmark -->
+    <aside class="container section" aria-labelledby="contact-faq-heading">
+      <div class="aside-callout">
+        <h2 id="contact-faq-heading" class="section-heading">Frequently Asked Questions</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-lg); margin-top: 1.5rem;">
+          <div>
+            <h3>What projects are you most interested in collaborating on?</h3>
+            <p>I am particularly eager to work on full-stack web applications, TypeScript/JavaScript software, cloud storage utilities, and accessible UI frameworks.</p>
+          </div>
+          <div>
+            <h3>Where are you located?</h3>
+            <p>I am based in <strong>Chennai, Tamil Nadu</strong>, studying at SRM Easwari Engineering College, and open to in-person and remote engagements.</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2 class="footer-brand-title">SUCHITH KUMAR V S</h2>
+          <p>
+            Second-year undergraduate student in Computer Science Engineering at SRM Easwari Engineering College, Chennai, Tamil Nadu.
+          </p>
+        </div>
+
+        <nav aria-label="Footer Quick Links">
+          <h3 style="font-size: 1rem; margin-bottom: 0.75rem; text-transform: uppercase;">Navigation</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Me</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div>
+          <h3 style="font-size: 1rem; margin-bottom: 0.75rem; text-transform: uppercase;">Connect</h3>
+          <ul class="footer-links">
+            <li><a href="https://github.com/SuchithKumar2007" target="_blank" rel="noopener noreferrer">GitHub: SuchithKumar2007</a></li>
+            <li><a href="https://linkedin.com/in/suchithkumarvs" target="_blank" rel="noopener noreferrer">LinkedIn Profile</a></li>
+            <li><a href="contact.html">Contact Information</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <address>
+          <span>Location: Chennai, Tamil Nadu, India</span> | 
+          <span>Email: <a href="mailto:suchithkumarvs@gmail.com">suchithkumarvs@gmail.com</a></span>
+        </address>
+        <p>&copy; <time datetime="2026">2026</time> Suchith Kumar V S. Advanced CSS3 &amp; Responsive Architecture.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
