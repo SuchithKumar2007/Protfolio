@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Manager | JavaScript Logic &amp; State Management - Suchith Kumar V S</title>
+  <meta name="description" content="Interactive client-side To-Do List application mastering DOM manipulation, event delegation, advanced filtering, and localStorage data persistence by Suchith Kumar V S.">
+  <meta name="author" content="Suchith Kumar V S">
+  <meta name="theme-color" content="#1d4ed8">
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Accessible Skip-to-Content Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div class="app-container">
+    <!-- Header Landmark with Flexbox -->
+    <header class="app-header" role="banner">
+      <div class="app-title-group">
+        <h1>
+          <span aria-hidden="true">&#9745;</span>
+          <span>Task Manager</span>
+        </h1>
+        <p class="app-subtitle">
+          JavaScript Logic &amp; State Management &bull; <strong>Suchith Kumar V S</strong> (SRM Easwari Engineering College)
+        </p>
+      </div>
+
+      <!-- Theme Switcher (Light / Dark) -->
+      <button type="button" id="theme-toggle" class="theme-btn" aria-label="Toggle dark/light theme" title="Toggle dark/light theme">
+        <svg class="theme-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Main Content Landmark -->
+    <main id="main-content">
+      <!-- 1. Progress & Statistics Card -->
+      <section class="stats-card" aria-label="Task progress and statistics">
+        <div class="stats-header">
+          <span class="stats-title">Progress Overview</span>
+          <span id="stats-counter" class="stats-counter" aria-live="polite">0 of 0 completed (0%)</span>
+        </div>
+        <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Task completion progress">
+          <div id="progress-bar" class="progress-fill"></div>
+        </div>
+        <div class="stats-pills">
+          <span class="stat-pill">Total: <strong id="stat-total">0</strong></span>
+          <span class="stat-pill">Active: <strong id="stat-active">0</strong></span>
+          <span class="stat-pill">Completed: <strong id="stat-completed">0</strong></span>
+        </div>
+      </section>
+
+      <!-- 2. Task Creation Form (CRUD: Create) -->
+      <section class="task-form-card" aria-label="Create a new task">
+        <form id="task-form" autocomplete="off">
+          <div class="task-form-grid">
+            <div class="task-input-row">
+              <label for="task-input" class="sr-only">Task Description</label>
+              <input
+                type="text"
+                id="task-input"
+                class="task-input"
+                placeholder="What needs to be done? e.g. Finish Data Structures assignment"
+                required
+                maxlength="140"
+              >
+              <button type="submit" class="btn-add" id="add-task-btn" aria-label="Add new task">
+                <span aria-hidden="true">&#43;</span> Add Task
+              </button>
+            </div>
+
+            <div class="task-meta-row">
+              <div class="task-selectors">
+                <!-- Category Select -->
+                <label for="task-category" class="sr-only">Select Category</label>
+                <select id="task-category" class="select-control" title="Task Category">
+                  <option value="college">Category: College / SRM</option>
+                  <option value="projects">Category: Projects</option>
+                  <option value="work">Category: Work</option>
+                  <option value="personal">Category: Personal</option>
+                </select>
+
+                <!-- Priority Select -->
+                <label for="task-priority" class="sr-only">Select Priority</label>
+                <select id="task-priority" class="select-control" title="Task Priority">
+                  <option value="high">Priority: High</option>
+                  <option value="medium" selected>Priority: Medium</option>
+                  <option value="low">Priority: Low</option>
+                </select>
+              </div>
+
+              <span style="font-size: 0.8rem; color: var(--text-muted);">
+                Press <kbd style="padding: 2px 5px; background: var(--bg-subtle); border: 1px solid var(--border-color); border-radius: 3px;">Enter</kbd> to add
+              </span>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <!-- 3. Advanced Filtering & Search Toolbar (CRUD: Filter & Search) -->
+      <section class="filter-toolbar" aria-label="Filter and search tasks">
+        <div class="filter-search-row">
+          <!-- Real-Time Search Bar -->
+          <div class="search-wrap">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <label for="search-input" class="sr-only">Search tasks by title or category</label>
+            <input
+              type="search"
+              id="search-input"
+              class="search-input"
+              placeholder="Search tasks..."
+            >
+          </div>
+
+          <!-- Status Filter Tabs (All, Active, Completed) -->
+          <div id="filter-tabs" class="filter-tabs" role="tablist" aria-label="Filter tasks by status">
+            <button type="button" class="filter-tab active" data-filter="all" role="tab" aria-selected="true">
+              All
+            </button>
+            <button type="button" class="filter-tab" data-filter="active" role="tab" aria-selected="false">
+              Active
+            </button>
+            <button type="button" class="filter-tab" data-filter="completed" role="tab" aria-selected="false">
+              Completed
+            </button>
+          </div>
+        </div>
+
+        <!-- Category Filter Pills -->
+        <div id="category-pills" class="category-pills-row" role="group" aria-label="Filter by category">
+          <span class="category-label">Category:</span>
+          <button type="button" class="cat-pill active" data-category="all" aria-pressed="true">All</button>
+          <button type="button" class="cat-pill" data-category="college" aria-pressed="false">College / SRM</button>
+          <button type="button" class="cat-pill" data-category="projects" aria-pressed="false">Projects</button>
+          <button type="button" class="cat-pill" data-category="work" aria-pressed="false">Work</button>
+          <button type="button" class="cat-pill" data-category="personal" aria-pressed="false">Personal</button>
+        </div>
+      </section>
+
+      <!-- 4. Dynamic Tasks List (CRUD: Read, Update, Delete) -->
+      <section aria-label="Tasks list">
+        <!-- Delegated list container -->
+        <ul id="todo-list" class="todo-list" role="list">
+          <!-- Dynamically populated by ui.js -->
+        </ul>
+
+        <!-- Empty State Card -->
+        <div id="empty-state" class="empty-state" role="status">
+          <div class="empty-icon" aria-hidden="true">&#128221;</div>
+          <h2 id="empty-title" class="empty-title">Your task list is empty</h2>
+          <p id="empty-desc" class="empty-desc">Add a task above to start tracking your goals.</p>
+        </div>
+      </section>
+
+      <!-- 5. Bulk Actions Toolbar -->
+      <section class="bulk-toolbar" aria-label="Bulk task actions">
+        <div class="bulk-actions-left">
+          <button type="button" id="toggle-all-btn" class="btn-text">
+            Mark All Completed / Active
+          </button>
+        </div>
+        <div>
+          <button type="button" id="clear-completed-btn" class="btn-text danger">
+            Clear Completed
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Accessible Transient Notification Toast -->
+    <div id="live-status" class="live-status" role="status" aria-live="polite"></div>
+
+    <!-- Application Footer -->
+    <footer class="app-footer" role="contentinfo">
+      <p>
+        Built by <strong>Suchith Kumar V S</strong> &bull; SRM Easwari Engineering College, Chennai, Tamil Nadu.
+      </p>
+      <p style="margin-top: 0.25rem;">
+        Task 3: JavaScript Logic &amp; State Management &bull; Pure Vanilla JS &amp; LocalStorage.
+      </p>
+    </footer>
+  </div>
+
+  <!-- Scripts in dependency order -->
+  <script src="js/state.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
