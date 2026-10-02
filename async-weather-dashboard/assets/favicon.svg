@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Weather Dashboard Logo">
+  <defs>
+    <linearGradient id="sunGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+    <linearGradient id="cloudGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#cbd5e1"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#0f172a"/>
+  <!-- Sun -->
+  <circle cx="26" cy="26" r="12" fill="url(#sunGrad)"/>
+  <!-- Cloud -->
+  <path d="M22 44 C18 44 15 41 15 37 C15 33.5 17.5 30.5 21 30 C22.5 24 28 20 34 20 C40.5 20 46 24.5 47 31 C50.5 31.5 53 34.5 53 38 C53 41.5 50 44 46.5 44 Z" fill="url(#cloudGrad)"/>
+</svg>

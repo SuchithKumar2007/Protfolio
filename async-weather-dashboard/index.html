@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real-Time Weather Dashboard | Asynchronous JavaScript &amp; RESTful APIs</title>
+  <meta name="description" content="Real-Time Weather Dashboard fetching live JSON data from public REST APIs using asynchronous JavaScript (Fetch API, async/await). Developed by Suchith Kumar V S at SRM Easwari Engineering College.">
+  <meta name="author" content="Suchith Kumar V S">
+  <meta name="theme-color" content="#0284c7">
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Accessible Skip-to-Content Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Site Header Landmark with Flexbox -->
+  <header class="app-header" role="banner">
+    <div class="app-container">
+      <div class="header-inner">
+        <a href="index.html" class="brand-link" aria-label="Weather Dashboard Homepage">
+          <img src="assets/favicon.svg" alt="" width="40" height="40" class="brand-icon" aria-hidden="true">
+          <span class="brand-title">
+            <span class="brand-name">Weather Dashboard</span>
+            <span class="brand-role">Async JS &amp; REST API &bull; SUCHITH KUMAR V S</span>
+          </span>
+        </a>
+
+        <div class="header-controls">
+          <!-- Temperature Unit Toggle Button (°C / °F) -->
+          <button type="button" id="unit-toggle" class="icon-btn unit-toggle-btn" title="Switch temperature units" aria-label="Switch temperature units">
+            &deg;F
+          </button>
+
+          <!-- Light / Dark Theme Toggle Button -->
+          <button type="button" id="theme-toggle" class="icon-btn" title="Toggle dark/light theme" aria-label="Toggle dark/light theme">
+            <svg class="btn-icon-svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+
+          <!-- Current Location Geolocation Button -->
+          <button type="button" id="current-location-btn" class="icon-btn" title="Use current GPS location" aria-label="Use current location weather">
+            <svg class="btn-icon-svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Landmark -->
+  <main id="main-content">
+    <div class="app-container">
+    <!-- 1. Search Toolbar Section -->
+    <section class="search-section" aria-label="City search and history shortcuts">
+      <div class="search-card">
+        <form id="search-form" class="search-form" autocomplete="off">
+          <div class="search-input-wrap">
+            <svg class="search-input-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <label for="search-input" class="sr-only">Search weather by city name</label>
+            <input
+              type="search"
+              id="search-input"
+              class="search-input"
+              placeholder="Search city... (e.g. Chennai, London, Tokyo, New York)"
+              required
+            >
+          </div>
+          <button type="submit" class="btn-submit" aria-label="Fetch weather for searched city">
+            <span>Search Weather</span>
+          </button>
+        </form>
+
+        <!-- Quick Cities & Recent History -->
+        <div class="quick-cities-row" aria-label="Quick city selection">
+          <span class="quick-label">Recents &amp; Popular:</span>
+          <div id="history-pills-container" style="display:inline-flex; flex-wrap:wrap; gap:0.4rem;">
+            <!-- Dynamically populated by ui.js -->
+            <button type="button" class="city-pill" data-city="Chennai">Chennai</button>
+            <button type="button" class="city-pill" data-city="Bangalore">Bangalore</button>
+            <button type="button" class="city-pill" data-city="London">London</button>
+            <button type="button" class="city-pill" data-city="Tokyo">Tokyo</button>
+            <button type="button" class="city-pill" data-city="New York">New York</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Error Alert Container -->
+    <div id="error-alert" class="error-alert" role="alert" aria-live="assertive">
+      <svg class="error-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="12"></line>
+        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+      </svg>
+      <div class="error-content">
+        <h3 id="error-title">Unable to Load Weather</h3>
+        <p id="error-message">City search failed. Please verify the city spelling or check your connection.</p>
+      </div>
+    </div>
+
+    <!-- Loading Overlay Spinner -->
+    <div id="loading-overlay" class="loading-overlay" role="status" aria-label="Loading weather data">
+      <div class="spinner"></div>
+      <p style="font-weight: 700; color: var(--text-primary);">Fetching live weather metrics via REST API...</p>
+    </div>
+
+    <!-- Weather Content Display Section -->
+    <div id="weather-content-section">
+      <!-- 2. Hero Weather Display Card -->
+      <section class="weather-hero-card" aria-label="Current Weather Summary">
+        <div class="hero-header">
+          <div>
+            <h2 id="city-name-display" class="city-name-title">Chennai</h2>
+            <div id="city-country-display" class="city-country-sub">Tamil Nadu, India</div>
+          </div>
+          <div id="update-time-display" class="update-time">Updated: Just now</div>
+        </div>
+
+        <div class="hero-main-grid">
+          <div class="temp-visual-box">
+            <div id="weather-icon-large" class="weather-icon-large">
+              <!-- Rendered SVG icon -->
+              <svg width="90" height="90" viewBox="0 0 64 64" fill="none"><circle cx="24" cy="24" r="12" fill="#f59e0b"/><path d="M18 44 C14 44 11 41 11 37 C11 33.5 13.5 30.5 17 30 C18.5 24 24 20 30 20 C36.5 20 42 24.5 43 31 C46.5 31.5 46 44 42.5 44 Z" fill="#cbd5e1"/></svg>
+            </div>
+            <div>
+              <div>
+                <span id="temp-large-display" class="temp-large-display">32</span>
+                <span id="temp-unit-display" class="temp-unit-label">&deg;C</span>
+              </div>
+              <div id="condition-text-display" class="condition-text">Mainly Clear</div>
+            </div>
+          </div>
+
+          <div style="display:flex; flex-direction:column; justify-content:center;">
+            <div class="hi-low-row">
+              <span id="temp-hi-display">High: 35&deg;</span>
+              <span id="temp-low-display">Low: 26&deg;</span>
+            </div>
+            <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.5rem; margin-bottom: 0;">
+              Live REST API forecast powered by Open-Meteo services.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Real-Time Weather Metrics Grid (CSS Grid 2D) -->
+      <section aria-label="Weather metrics breakdown" style="margin-bottom: 1.5rem;">
+        <h2 class="section-title">
+          <span aria-hidden="true">&#128202;</span> Live Metrics
+        </h2>
+
+        <div class="metrics-grid">
+          <!-- Humidity Card -->
+          <div class="metric-card">
+            <div class="metric-icon-wrap" aria-hidden="true">
+              <svg class="metric-svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+              </svg>
+            </div>
+            <div class="metric-info">
+              <span class="metric-label">Humidity</span>
+              <span id="metric-humidity" class="metric-value">68%</span>
+            </div>
+          </div>
+
+          <!-- Wind Speed Card -->
+          <div class="metric-card">
+            <div class="metric-icon-wrap" aria-hidden="true">
+              <svg class="metric-svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path>
+              </svg>
+            </div>
+            <div class="metric-info">
+              <span class="metric-label">Wind Speed</span>
+              <span id="metric-wind" class="metric-value">15 km/h</span>
+            </div>
+          </div>
+
+          <!-- Surface Pressure Card -->
+          <div class="metric-card">
+            <div class="metric-icon-wrap" aria-hidden="true">
+              <svg class="metric-svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 6v6l4 2"></path>
+              </svg>
+            </div>
+            <div class="metric-info">
+              <span class="metric-label">Pressure</span>
+              <span id="metric-pressure" class="metric-value">1008 hPa</span>
+            </div>
+          </div>
+
+          <!-- UV Index Card -->
+          <div class="metric-card">
+            <div class="metric-icon-wrap" aria-hidden="true">
+              <svg class="metric-svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              </svg>
+            </div>
+            <div class="metric-info">
+              <span class="metric-label">Max UV Index</span>
+              <span id="metric-uv" class="metric-value">8.5 UV</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Hourly Forecast Strip -->
+      <section class="forecast-section" aria-label="Hourly temperature forecast">
+        <h2 class="section-title">
+          <span aria-hidden="true">&#9200;</span> 12-Hour Forecast
+        </h2>
+        <div id="hourly-scroll-container" class="hourly-scroll-container">
+          <!-- Dynamically populated by ui.js -->
+        </div>
+      </section>
+
+      <!-- 5. 5-Day Daily Forecast Grid -->
+      <section class="forecast-section" aria-label="5-day weather forecast">
+        <h2 class="section-title">
+          <span aria-hidden="true">&#128197;</span> 5-Day Forecast
+        </h2>
+        <div id="daily-forecast-grid" class="forecast-grid">
+          <!-- Dynamically populated by ui.js -->
+        </div>
+      </section>
+    </div>
+  </div>
+  </main>
+
+  <!-- Site Footer Landmark -->
+  <footer class="app-footer" role="contentinfo">
+    <div class="app-container">
+      <p>
+        Built by <strong>SUCHITH KUMAR V S</strong> &bull; SRM Easwari Engineering College, Chennai, Tamil Nadu.
+      </p>
+      <p style="margin-top: 0.25rem;">
+        Task 4: Asynchronous JavaScript &amp; RESTful APIs &bull; Open-Meteo Public REST API &bull; Modern Fetch API &amp; Async/Await.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Scripts in dependency order -->
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
