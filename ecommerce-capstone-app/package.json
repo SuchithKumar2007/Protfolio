@@ -1,0 +1,12 @@
+{
+  "name": "ecommerce-capstone-app",
+  "version": "1.0.0",
+  "description": "Full-Stack Web Development Capstone Application by Suchith Kumar V S",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "keywords": ["capstone", "ecommerce", "spa", "router", "antigravity"],
+  "author": "Suchith Kumar V S <suchithkumarvs@gmail.com>",
+  "license": "MIT"
+}
